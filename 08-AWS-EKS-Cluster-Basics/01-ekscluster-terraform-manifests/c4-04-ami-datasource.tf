@@ -19,3 +19,7 @@ data "aws_ami" "amzlinux2" {
     values = [ "x86_64" ]
   }
 }
+
+data "aws_key_pair" "new_ec2_key" {
+  key_name = "new-ec2-key"
+}

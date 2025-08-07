@@ -1,13 +1,16 @@
 # Create a Null Resource and Provisioners
+/*
 resource "null_resource" "copy_ec2_keys" {
   depends_on = [module.ec2_public]
   # Connection Block for Provisioners to connect to EC2 Instance
   connection {
     type     = "ssh"
-    host     = aws_eip.bastion_eip.public_ip    
+    # host     = aws_eip.bastion_eip.public_ip    
+    host     = module.ec2_public.public_ip 
     user     = "ec2-user"
     password = ""
-    private_key = file("private-key/eks-terraform-key.pem")
+    # private_key = file("private-key/eks-terraform-key.pem")
+    private_key = file("/home/ubuntu/dev/aws/keypair/new-ec2-key.pem")
   }  
 
 ## File Provisioner: Copies the terraform-key.pem file to /tmp/terraform-key.pem
@@ -29,3 +32,4 @@ resource "null_resource" "copy_ec2_keys" {
   }
 
 }
+*/

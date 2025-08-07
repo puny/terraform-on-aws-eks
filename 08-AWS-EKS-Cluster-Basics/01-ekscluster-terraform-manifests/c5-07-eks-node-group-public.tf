@@ -1,5 +1,30 @@
+
+/*
+resource "aws_launch_template" "eks_ng_lt" {
+  name_prefix   = "${aws_eks_cluster.eks_cluster.name}-nodegroup-"
+  # image_id      = data.aws_ami.amzlinux2.id
+  instance_type = var.node_instance_type
+  key_name      = "new-ec2-key"
+
+  block_device_mappings {
+    device_name = "/dev/xvda"
+    ebs {
+      volume_size = 20
+      volume_type = "gp3"
+      delete_on_termination = true
+    }
+  }
+
+  network_interfaces {
+    # public subnet nodegroup에서 eip 만들지 않는 설정 launch template 에서 설정 가능
+    # 이거를 false로 하면 외부 통신이 되지 않아 nodegroup join되지 않는 문제 발생 !!
+    associate_public_ip_address = true
+  }
+}
+
+
 # Create AWS EKS Node Group - Public
-resource "aws_eks_node_group" "eks_ng_public" {
+resource "aws_eks_node_group" "eks_ng_public" {  
   cluster_name    = aws_eks_cluster.eks_cluster.name
 
   node_group_name = "${local.name}-eks-ng-public"
@@ -7,14 +32,19 @@ resource "aws_eks_node_group" "eks_ng_public" {
   subnet_ids      = module.vpc.public_subnets
   #version = var.cluster_version #(Optional: Defaults to EKS Cluster Kubernetes version)    
   
-  ami_type = "AL2_x86_64"  
-  capacity_type = "ON_DEMAND"
-  disk_size = 20
-  instance_types = ["t3.medium"]
-  
-  
-  remote_access {
-    ec2_ssh_key = "eks-terraform-key"
+  ami_type = "AL2023_x86_64_STANDARD"
+  capacity_type = var.node_capacity_type  
+  # instance_types = [ var.node_instance_type ]  
+
+  # launch template 또는 nodegroup 둘중 하나에만 선언해야 함  
+  # remote_access {
+  #   # ec2_ssh_key = "eks-terraform-key"
+  #   ec2_ssh_key = "new-ec2-key"
+  # }
+
+  launch_template {
+    id      = aws_launch_template.eks_ng_lt.id
+    version = "$Latest"
   }
 
   scaling_config {
@@ -39,5 +69,7 @@ resource "aws_eks_node_group" "eks_ng_public" {
 
   tags = {
     Name = "Public-Node-Group"
+    cost = "Public-Node-Group"
   }
 }
+*/

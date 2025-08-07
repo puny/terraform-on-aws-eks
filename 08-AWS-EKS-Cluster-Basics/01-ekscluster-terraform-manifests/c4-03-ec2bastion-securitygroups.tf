@@ -1,5 +1,6 @@
 # AWS EC2 Security Group Terraform Module
 # Security Group for Public Bastion Host
+/*
 module "public_bastion_sg" {
   source  = "terraform-aws-modules/security-group/aws"
   #version = "4.5.0"
@@ -16,3 +17,4 @@ module "public_bastion_sg" {
   egress_rules = ["all-all"]
   tags = local.common_tags
 }
+*/

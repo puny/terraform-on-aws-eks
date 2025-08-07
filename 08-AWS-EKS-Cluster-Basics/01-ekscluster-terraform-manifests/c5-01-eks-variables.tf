@@ -16,6 +16,19 @@ variable "cluster_version" {
   type = string
   default     = null
 }
+
+variable "node_capacity_type" {
+  description = ""
+  type = string
+  default = "SPOT"
+}
+
+variable "node_instance_type" {
+  description = ""
+  type = string
+  default = "t3a.small"
+}
+
 variable "cluster_endpoint_private_access" {
   description = "Indicates whether or not the Amazon EKS private API server endpoint is enabled."
   type        = bool
