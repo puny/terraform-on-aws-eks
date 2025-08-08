@@ -6,7 +6,8 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       #version = ">= 4.65"
-      version = ">= 5.31"
+      # version = ">= 5.31"
+      version = ">= 6.8.0"
     }
   }
 }
@@ -14,7 +15,7 @@ terraform {
 # Provider Block
 provider "aws" {
   region  = var.aws_region
-  profile = "default"
+  profile = "sub-admin"
 }
 /*
 Note-1:  AWS Credentials Profile (profile = "default") configured on your local desktop terminal  
