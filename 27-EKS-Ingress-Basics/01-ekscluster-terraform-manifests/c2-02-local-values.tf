@@ -7,6 +7,7 @@ locals {
   common_tags = {
     owners = local.owners
     environment = local.environment
+    cost = "workshop-27-eks-ingress-basics"
   }
   eks_cluster_name = "${local.name}-${var.cluster_name}"  
 } 
