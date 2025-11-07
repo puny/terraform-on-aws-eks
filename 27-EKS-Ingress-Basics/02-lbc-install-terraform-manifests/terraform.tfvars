@@ -1,5 +1,5 @@
 # Generic Variables
-aws_region = "us-east-1"
+aws_region = "ap-northeast-2"
 environment = "dev"
 business_divsion = "hr"
 

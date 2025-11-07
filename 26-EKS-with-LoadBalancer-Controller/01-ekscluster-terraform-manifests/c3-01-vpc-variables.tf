@@ -4,7 +4,7 @@
 variable "vpc_name" {
   description = "VPC Name"
   type = string 
-  default = "myvpc"
+  default = "eks-workshop-vpc"
 }
 
 # VPC CIDR Block
